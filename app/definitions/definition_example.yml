@@ -1,0 +1,10 @@
+:name: AdScheduled Ads for campaigns
+:format: CSV
+:type: CAMPAIGN_AD_SCHEDULE_TARGET_REPORT
+:fields: CampaignId, Id, BidModifier
+:predicates:
+  :field: :CampaignId,
+  :operator: IN
+  :values:
+:date: TODAY
+:zero_impressions: true

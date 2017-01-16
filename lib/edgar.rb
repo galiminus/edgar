@@ -1,5 +1,15 @@
-require "edgar/engine"
+require 'edgar/engine'
+require 'adwords_api'
+require 'influxdb'
+require 'sidekiq'
+require 'sidetiq'
+require 'csv'
 
 module Edgar
-  # Your code goes here...
+  def self.load_paths
+    [
+      'app/services',
+      'app/workers'
+    ]
+  end
 end

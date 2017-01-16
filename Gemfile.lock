@@ -55,6 +55,7 @@ GEM
       nokogiri
     arel (7.1.4)
     builder (3.2.2)
+    byebug (9.0.6)
     cause (0.1)
     celluloid (0.17.3)
       celluloid-essentials
@@ -125,7 +126,6 @@ GEM
     nokogiri (1.7.0.1)
       mini_portile2 (~> 2.1.0)
     nori (2.6.0)
-    pg (0.19.0)
     public_suffix (2.0.5)
     rack (2.0.1)
     rack-protection (1.5.3)
@@ -196,8 +196,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  byebug
   edgar!
-  pg
 
 BUNDLED WITH
    1.13.5

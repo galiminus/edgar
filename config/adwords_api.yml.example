@@ -1,0 +1,13 @@
+:authentication:
+  :method: OAuth2
+  :oauth2_client_id: 
+  :oauth2_client_secret: 
+  :client_customer_id: 
+  :developer_token: 
+  :user_agent: Amuse
+:service:
+  :environment: PRODUCTION
+:connection:
+  :enable_gzip: false
+:library:
+  :log_level: INFO
