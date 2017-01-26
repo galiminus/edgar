@@ -13,3 +13,40 @@
  *= require_tree .
  *= require_self
  */
+
+.dropzone {
+  min-height: 256px;
+  background: aliceblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: helvetica;
+  font-weight: normal;
+  font-size: 22px;
+  padding: 2ex;
+  color: darkgray;
+  border: 3px dashed cornflowerblue;
+  transition: background 1s ease;
+}
+.edgar-datepicker {
+  font-family: helvetica;
+  font-size: 1.6rem;;
+  text-align: center;
+  padding: 1ex;
+  margin-bottom: 2ex;
+}
+.edgar-logo {
+  height: 124px;
+  fill: cornflowerblue;
+  fill-opacity: 0.2;
+  stroke: cornflowerblue;
+  stroke-width: 7;
+  margin-bottom: 1ex;
+  transform: translate(-6%, 0);
+  transition: fill, fill-opacity 500ms ease;
+}
+.dropzone:hover > .edgar-logo {
+  fill: cornflowerblue;
+  fill-opacity: 0.6;
+}

@@ -1,4 +1,9 @@
 module Edgar
+
+  # Provides a small wrapper for Amazon S3 services.
+  #
+  #   AWSClient.new(name, file).upload
+  #
   class AWSClient
     def initialize(name, file)
       @name = name

@@ -11,3 +11,20 @@
 // about supported directives.
 //
 //= require_tree .
+//= require ./dropzone.js
+
+Dropzone.options.edgarDropzone = {
+  paramName: 'report[file]',
+  acceptedFiles: 'text/csv',
+  uploadMultiple: false,
+  addRemoveLinks: false,
+  dictDefaultMessage: 'Drop your report in valid [*.csv] format, here!!',
+  previewTemplate: '<div></div>',
+  complete: function() {
+    console.info('Edgar :: Upload successed!! :: ^_^');
+    let elem = document.querySelector('.dz-message');
+    let mesg = elem.innerText;
+    elem.innerText = "Good boy!!";
+    setTimeout(function(){ elem.innerText = mesg }, 4000);
+  }
+}
