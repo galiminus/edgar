@@ -1,6 +1,3 @@
-require 'active_record'
-require 'aasm'
-
 module Edgar
   class Report < ::ActiveRecord::Base
     self.table_name = 'edgar_reports'
@@ -18,6 +15,8 @@ module Edgar
         transitions from: :ready, to: :processed, if: :processed?
       end
     end
+
+    scope :completion, -> { order(aasm_state: :desc) }
 
     def youtube_earned_data
       data = JSON.parse(self.youtube_earned_data_raw)
@@ -58,6 +57,14 @@ module Edgar
       { labels: labels, lines: lines, totals: totals }
     end
 
+    def to_csv
+      return nil unless self.aasm_state == 'processed'
+
+      CSV.generate do |csv|
+        csv << self.body.keys << self.body.values
+      end
+    end
+
     def has_youtube_earned_data?
       self.youtube_earned_data_raw?
     end
@@ -66,8 +73,8 @@ module Edgar
       self.youtube_data_raw.present?
     end
 
-    def has_has_adwords_data?
-      self.youtube_adwords_data_raw.present?
+    def has_adwords_data?
+      self.adwords_data_raw.present?
     end
 
     def stamps

@@ -1,0 +1,50 @@
+<table class="reports">
+  <tr>
+    <th>date</th>
+    <th>id</th>
+    <th>name</th>
+    <th>account name</th>
+    <th>account id</th>
+    <th>created at</th>
+    <th>updated at</th>
+    <th>completion</th>
+    <th>status</th>
+    <th>link</th>
+  </tr>
+  <% @reports.each do |report| %>
+  <tr>
+    <td class='date'><%= report.date %></td>
+    <td><%= report.id %></td>
+    <td><%= report.name %></td>
+    <td><%= report.account_name %></td>
+    <td class='date'><%= report.account_id %></td>
+    <td class='date'><%= report.created_at %></td>
+    <td class='date'><%= report.updated_at %></td>
+    <td class='stamps'><%= report.stamps.join(', ').capitalize %></td>
+    <td>
+      <% if report.aasm_state == 'pending' %>
+        <span class='pending'>:pending</span>
+      <% elsif report.aasm_state == 'ready' %>
+        <span class='ready'>:ready</span>
+      <% elsif report.aasm_state == 'processed' %>
+        <span class='processed'>:processed</span>
+      <% end %>
+    </td>
+    <td>
+      <% #if report.aasm_state == 'processed' %>
+        <%= link_to('Download', report_url(report), target: '_blank', class: 'download-btn') %>
+      <% #end %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+<%= paginate @reports, window: 2 %>
+
+  
+  
+  
+  
+  
+  
+  
+  

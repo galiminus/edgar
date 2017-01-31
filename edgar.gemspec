@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
   s.add_dependency "google-api-client", "~> 0.8"
   s.add_dependency "google-adwords-api"
   s.add_dependency "aasm"
+  s.add_dependency "kaminari"
 
   s.add_development_dependency "byebug"
 end

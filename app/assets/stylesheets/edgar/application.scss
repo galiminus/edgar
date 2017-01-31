@@ -50,3 +50,56 @@
   fill: cornflowerblue;
   fill-opacity: 0.6;
 }
+.reports {
+  font-family: helvetica;
+  border-collapse: collapse;
+  th {
+    text-transform: uppercase;
+    font-size: .8rem;
+    background: aliceblue;
+    color: darkgray;
+    padding: 10px 10px 3px 10px;
+    border: 1px solid cornflowerblue;
+  }
+  td {
+    padding: 5px 10px 5px 10px;
+    color: darkslategray;
+    border: 1px solid cornflowerblue;
+    &.date {
+      font-size: .9rem;
+    }
+    &.stamps {
+      font-size: .9rem;
+    }
+    a {
+      font-size: .9rem;
+    }
+    span {
+      padding: 4px 8px 4px 8px;
+      font-size: .9rem;
+      font-weight: bold;
+      border-radius: 4px;
+      &.pending {
+        background: papayawhip;
+        color: salmon;
+        border: 1px solid salmon;
+      }
+      &.ready {
+        background: palegreen;
+        color: olivedrab;
+        border: 1px solid olivedrab;
+      }
+      &.processed {
+        background: lightcyan;
+        color: royalblue;
+        border: 1px solid royalblue;
+      }
+    }
+  }
+}
+.pagination {
+  list-style: none;
+  li {
+    display: inline;
+  }
+}

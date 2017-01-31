@@ -7,7 +7,7 @@ module Edgar
 
     def perform
       definition = Edgar::ReportDefinition.new('VIDEO PERFORMANCE')
-      client = Edgar::AdwordsClient.new Team.find(3)
+      client = Edgar::AdwordsClient.new Team.find_by_name('EDGAR_TEAM_NAME')
       client.connect
 
       selector = {

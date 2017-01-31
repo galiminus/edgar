@@ -6,6 +6,7 @@ PATH
       google-adwords-api
       google-api-client (~> 0.8)
       influxdb
+      kaminari
       rails (~> 5.0.0, >= 5.0.0.1)
       sidekiq
       sidetiq
@@ -131,6 +132,18 @@ GEM
       json
     json (2.0.3)
     jwt (1.5.6)
+    kaminari (1.0.0)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.0.0)
+      kaminari-activerecord (= 1.0.0)
+      kaminari-core (= 1.0.0)
+    kaminari-actionview (1.0.0)
+      actionview
+      kaminari-core (= 1.0.0)
+    kaminari-activerecord (1.0.0)
+      activerecord
+      kaminari-core (= 1.0.0)
+    kaminari-core (1.0.0)
     little-plugger (1.1.4)
     logging (2.1.0)
       little-plugger (~> 1.1)

@@ -2,6 +2,11 @@ module Edgar
   class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception
 
+    def index
+      @reports = Edgar::Report.all
+      render 'edgar/index', layout: 'edgar/application'
+    end
+
     def uploads
       render 'edgar/uploads', layout: 'edgar/application'
     end
