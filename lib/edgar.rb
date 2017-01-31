@@ -8,8 +8,8 @@ require 'csv'
 module Edgar
   def self.load_paths
     [
-      'app/services',
-      'app/workers'
+      'app/services/edgar/',
+      'app/workers/edgar/'
     ]
   end
 end
