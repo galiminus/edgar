@@ -61,7 +61,7 @@ module Edgar
       return nil unless self.aasm_state == 'processed'
 
       CSV.generate do |csv|
-        csv << self.body.keys << self.body.values
+        csv << self.body[:values].keys << self.body[:values].values
       end
     end
 
