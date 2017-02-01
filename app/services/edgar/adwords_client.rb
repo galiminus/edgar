@@ -42,7 +42,8 @@ module Edgar
   #
   class AdwordsClient
     def initialize(account)
-      configuration = YAML.load(File.read(File.join(Rails.root, 'config', 'adwords_api.yml')))
+      #configuration = YAML.load(File.read(File.join(Rails.root, 'config', 'adwords_api.yml')))
+      configuration = YAML.load(ERB.new(File.read("#{Rails.root}/config/adwords_api.yml.erb")).result)
       @globals = YAML.load(File.read(File.join(Edgar::Engine.root, 'config', 'adwords_globals.yml')))
       @api = AdwordsApi::Api.new(configuration)
       @cache = Redis.new
