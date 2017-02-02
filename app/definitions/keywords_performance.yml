@@ -1,0 +1,6 @@
+:name: Keywords Performance Report
+:format: CSV
+:type: KEYWORDS_PERFORMANCE_REPORT
+:fields: CampaignId, CampaignName, CampaignStatus, Date, AdGroupId, Id, Criteria, Clicks 
+:date: YESTERDAY
+:zero_impressions: true

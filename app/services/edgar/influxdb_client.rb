@@ -28,7 +28,7 @@ module Edgar
         @client.write_points(data, 'm')
       elsif data.is_a? Hash
         raise 'You must name your series!' if name.nil?
-        @client.write_point(name, data, 'm')
+        @client.write_point(name, data, 's')
       else
         raise 'Your data must be a Hash or an Array!'
       end
