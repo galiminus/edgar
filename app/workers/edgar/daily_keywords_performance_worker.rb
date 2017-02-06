@@ -17,12 +17,12 @@ module Edgar
 
       accounts = client.service(:accounts).get(selector)
 
-      accounts[:entries].drop(1).each do |account|
+      accounts[:entries].reject{ |e| e[:name] == 'Amuse' }.each do |account|
 
         data = client.for(account[:customer_id]).report(definition)
 
         Edgar::AWSClient.new(
-          "daily-video-performance-#{account[:customer_id]}-#{Time.zone.now.strftime('%d%m%Y')}.csv",
+          "daily-video-performance-#{account[:customer_id]}-#{(Time.zone.now - 1.day).strftime('%d%m%Y')}.csv",
           StringIO.new(data)
         ).upload
 

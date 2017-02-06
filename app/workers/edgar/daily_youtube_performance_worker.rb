@@ -28,9 +28,10 @@ module Edgar
         }
       end
 
-      record = Edgar::Report.where('date >= ?', Time.zone.now.beginning_of_day)
+      record = Edgar::Report.where('date >= ?', (Time.zone.now - 1.day).beginning_of_day)
       .first_or_create(name: 'Video Performance Report')
 
+      record.date ||= (Time.zone.now - 1.day).beginning_of_day
       record.youtube_data_raw = data.to_json
       record.save!
 
@@ -41,7 +42,7 @@ module Edgar
       end
 
       Edgar::AWSClient.new(
-        "daily-youtube-performance-#{client.id}-#{Time.zone.now.strftime('%d%m%Y')}.csv",
+        "daily-youtube-performance-#{client.id}-#{(Time.zone.now - 1.day).strftime('%d%m%Y')}.csv",
         stringIO
       ).upload
     end

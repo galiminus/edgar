@@ -17,20 +17,21 @@ module Edgar
 
       accounts = client.service(:accounts).get(selector)
 
-      accounts[:entries].drop(1).each do |account|
+      accounts[:entries].reject{ |e| e[:name] == 'Amuse' }.each do |account|
 
         data = client.for(account[:customer_id]).report(definition)
 
         record = Edgar::Report.where('date >= ?', Time.zone.now.beginning_of_day)
         .first_or_create(name: 'Video Performance Report')
 
+        record.date = (Time.zone.now - 1.day).beginning_of_day
         record.account_name = account[:name],
         record.account_id = account[:customer_id],
         record.adwords_data_raw = CSV.parse(data).to_json
         record.save!
  
         Edgar::AWSClient.new(
-          "daily-video-performance-#{account[:customer_id]}-#{Time.zone.now.strftime('%d%m%Y')}.csv",
+          "daily-video-performance-#{account[:customer_id]}-#{(Time.zone.now - 1.day).strftime('%d%m%Y')}.csv",
           StringIO.new(data)
         ).upload
       end
