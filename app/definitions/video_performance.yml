@@ -1,6 +1,6 @@
 :name: Video Performance Report
 :format: CSV
 :type: VIDEO_PERFORMANCE_REPORT
-:fields: CampaignId, CampaignName, CampaignStatus, Date, Cost, VideoId, VideoTitle, VideoViewRate, VideoViews, VideoChannelId, VideoDuration, Impressions, AverageCpm, AverageCpv,
+:fields: CampaignId, CampaignName, CampaignStatus, Date, Cost, VideoChannelId, VideoId, VideoTitle, VideoViewRate, VideoViews, VideoChannelId, VideoDuration, Impressions, AverageCpm, AverageCpv,
 :date: YESTERDAY
 :zero_impressions: true

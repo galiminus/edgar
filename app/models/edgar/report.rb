@@ -3,6 +3,8 @@ module Edgar
     self.table_name = 'edgar_reports'
     include AASM
 
+    after_save :process, if: Proc.new { |instance| instance.ready? and instance.aasm_state == 'processed' }
+
     aasm whiny_transitions: false do
       state :pending, initial: true
       state :ready, :processed
@@ -11,7 +13,7 @@ module Edgar
         transitions from: :pending, to: :ready, if: :ready?
       end
 
-      event :finalise do
+      event :finalize do
         transitions from: :ready, to: :processed, if: :processed?
       end
     end
@@ -45,16 +47,16 @@ module Edgar
       labels = data[1].tap{ |e| e.delete_at(0) }
       .map{ |e| e.downcase.gsub(' ', '_').gsub(/[.()%]+/, '').to_sym }
 
-      lines = data[1..-2].tap{ |e| e.delete_at(0) }.map do |line|
+      rows = data[1..-2].tap{ |e| e.delete_at(0) }.map do |row|
         labels.zip(
-          line.tap{ |e| e.delete_at(0) }
+          row.tap{ |e| e.delete_at(0) }
         ).map{ |e| e[0].to_s.include?('campaign') ? e : [e[0], e[1].to_f] }.to_h
       end
 
       totals = labels.zip(data[-1].tap{ |e| e.delete_at(0) })
       .map{ |e| e[0].to_s.include?('campaign') ? e : [e[0], e[1].to_f] }.to_h
 
-      { labels: labels, lines: lines, totals: totals }
+      { labels: labels, rows: rows, totals: totals }
     end
 
     def to_csv
@@ -77,6 +79,14 @@ module Edgar
       self.adwords_data_raw.present?
     end
 
+    def ready?
+      [
+        self.adwords_data_raw.present?,
+        self.youtube_data_raw.present?,
+        self.youtube_earned_data_raw.present?
+      ].all?
+    end
+
     def stamps
       [
         (self.has_youtube_data? ? :youtube : nil),
@@ -89,14 +99,6 @@ module Edgar
 
     def process
       Edgar::DailyReportReplenishmentWorker.perform_async(self.id)
-    end
-
-    def ready?
-      [
-        self.adwords_data_raw.present?,
-        self.youtube_data_raw.present?,
-        self.youtube_earned_data_raw.present?
-      ].all?
     end
 
     def processed?

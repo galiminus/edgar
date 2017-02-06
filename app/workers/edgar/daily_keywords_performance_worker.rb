@@ -28,15 +28,13 @@ module Edgar
 
         ts = CSV.parse(data)[2..-1].map do |row|
           {
-            series: account[:customer_id],
-            tags: [
-              row[0], # CampaignId
-              row[1], # Campaign
-              row[4], # AdGroupId
-              row[5], # KeywordId
-              row[6], # Keyword
-              'daily', 'video', 'performance', 'youtube', 'adwords', 'kpi'
-            ],
+            tags: {
+              campaign_id: row[0],
+              campaign_name: row[1],
+              adgroup_id: row[4],
+              keyword_id: row[5],
+              keyword: row[6],
+            },
             values: Hash.new(0).merge!(
               clicks: row[7]
             )

@@ -29,7 +29,7 @@ module Edgar
       end
 
       record = Edgar::Report.where('date >= ?', Time.zone.now.beginning_of_day)
-      .first_or_create(name: 'Video Peqrformance Report')
+      .first_or_create(name: 'Video Performance Report')
 
       record.youtube_data_raw = data.to_json
       record.save!

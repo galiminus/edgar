@@ -13,7 +13,7 @@ module Edgar
         Faraday.get('https://api.fixer.io/latest?base=MXN').body
       )['rates']['USD'].to_f
 
-      ts = adwords[:lines].map do |ads|
+      ts = adwords[:rows].map do |ads|
 
         yte = youtube_earned.select{ |line| line[:campaign] == ads[:campaign] }.last
 
@@ -31,15 +31,14 @@ module Edgar
         subscribers_percentage = yte[:earned_subscribers] / yt[:subescribers]
 
         return {
-          series: ads[:campaign_id],
-          tags: [
-            report[:date].strftime('%d%m%Y'),
-            report[:account_name],
-            report[:account_id],
-            ads[:campaign],
-            ads[:campaign_id],
-            'daily', 'video', 'performance', 'youtube', 'adwords', 'kpi'
-          ],
+          tags: {
+            time: report[:date].strftime('%d%m%Y'),
+            account_name: report[:account_name],
+            account_id: report[:account_id],
+            campaign_name: ads[:campaign],
+            campaign_id: ads[:campaign_id],
+            channel_id: ads[:video_channel_id]
+          },
           values: Hash.new(0).merge!(
             exchange_rate: mxn2usd,
             #date: ads[:day],
@@ -48,7 +47,8 @@ module Edgar
             paid_views: ads[:views],
             view_rate: ads[:view_rate],
             cost_paid_mxn: ads[:cost],
-            #cost_paid_currency: ads[:acccount_currency_code],
+            cost: ads[:cost],
+            #cost_paid_currency: ads[:account_currency_code],
             cpv_currency: cpv_currency,
             cpv_verification: ads[:average_cpv],
             earned_views: yte[:earned_views],
