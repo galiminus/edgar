@@ -7,8 +7,8 @@ module Edgar
   class YoutubeAnalyticsClient
     def initialize
       Yt.configure do |config|
-        config.client_id = ENV['YOUTUBE_CLIENT_ID']
-        config.client_secret = ENV['YOUTUBE_CLIENT_SECRET']
+        config.client_id = ENV['YT_CLIENT_ID']
+        config.client_secret = ENV['YT_CLIENT_SECRET']
       end
       
       @client = Yt::Account.new(
