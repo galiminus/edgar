@@ -12,7 +12,7 @@ module Edgar
       end
       
       @client = Yt::Account.new(
-        refresh_token: Team.find_by_name(ENV['EDGAR_TEAM_NAME']).adwords_refresh_token,
+        refresh_token: Team.find_by_name(ENV['EDGAR_TEAM_NAME']).youtube_accounts[0].refresh_token,
         expires_at: 0
       )      
     end
