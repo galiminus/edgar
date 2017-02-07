@@ -6,10 +6,13 @@ module Edgar
     recurrence { daily }
 
     def perform
-      client = Edgar::YoutubeAnalyticsClient.new.core
+      client = Edgar::YoutubeAnalyticsClient.new
+      channels = YoutubeChannel.for(Team.find_by_name(ENV['EDGAR_TEAM_NAME']))
 
-      data = client.channels.map do |channel|
-        {
+      data = channels.map(&:id).map do |id|
+        channel = client.for(id)
+
+        return {
           id: channel.id,
           title: channel.title,
           date: Time.zone.now,
