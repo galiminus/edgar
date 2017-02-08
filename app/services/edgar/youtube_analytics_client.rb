@@ -8,6 +8,13 @@ module Edgar
     def initialize
       youtube_account = Team.find_by_name(ENV['EDGAR_TEAM_NAME']).youtube_accounts[0]
 
+      scopes = [
+        'youtube',
+        'youtube.readonly',
+        'yt-analytics.readonly',
+        'yt-analytics-monetary.readonly'
+      ]
+
       Yt.configure do |config|
         config.client_id = ENV['YT_CLIENT_ID']
         config.client_secret = ENV['YT_CLIENT_SECRET']
@@ -15,14 +22,14 @@ module Edgar
       
       @account = Yt::Account.new(
         refresh_token: youtube_account.refresh_token,
-        scopes: ['youtube', 'youtube.readonly'],
+        scopes: scopes,
         expires_at: 0
       )      
 
       @owner = Yt::ContentOwner.new(
         name: youtube_account.owner_name,
         refresh_token: youtube_account.refresh_token,
-        scopes: ['youtube', 'youtube.readonly'],
+        scopes: scopes,
         expires_at: 0
       )
     end
