@@ -20,13 +20,13 @@ module Edgar
             by: :day,
             since: 1.day.ago,
             until: 1.day.ago
-          ),
-          monetized_playbacks: channel.monetized_playbacks,
+          ).values.reduce(:+),
+          monetized_playbacks: channel.monetized_playbacks[:total],
           revenue: channel.estimated_revenue(
             since: 1.day.ago,
             until: 1.day.ago,
             in: 'FR'
-          ),
+          ).values.reduce(:+),
           subscribers: channel.subscriber_count
         }
       end
