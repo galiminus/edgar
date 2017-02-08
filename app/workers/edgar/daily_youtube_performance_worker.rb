@@ -12,7 +12,7 @@ module Edgar
       data = channels.map(&:id).map do |id|
         channel = client.for(id)
 
-        return {
+        {
           id: channel.id,
           title: channel.title,
           date: Time.zone.now,
@@ -39,13 +39,16 @@ module Edgar
       record.save!
 
       stringIO = StringIO.new
-      stringIO << data.keys.join(',') << '\r\n'
-      data.values.each_slice(data.keys.count) do |line|
-        stringIO << line.join(',') << '\r\n'
+      stringIO << data.first.keys.join(',') << '\r\n'
+
+      data.each do |dataset|
+        dataset.values.each_slice(dataset.keys.count) do |row|
+          stringIO << row.join(',') << '\r\n'
+        end
       end
 
       Edgar::AWSClient.new(
-        "daily-youtube-performance-#{client.id}-#{(Time.zone.now - 1.day).strftime('%d%m%Y')}.csv",
+        "daily-youtube-performance-#{(Time.zone.now - 1.day).strftime('%d%m%Y')}.csv",
         stringIO
       ).upload
     end
