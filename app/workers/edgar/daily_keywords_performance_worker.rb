@@ -36,7 +36,7 @@ module Edgar
               keyword: row[6],
             },
             values: Hash.new(0).merge!(
-              clicks: row[7]
+              clicks: row[7].to_f
             )
           }
         end

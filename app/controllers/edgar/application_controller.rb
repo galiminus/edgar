@@ -13,13 +13,14 @@ module Edgar
 
     def earned_report_upload
       record = Edgar::Report.where(
-        'created_at >= ?',
+        'date >= ?',
         report_params[:date].to_date || (Time.zone.now - 1.day).beginning_of_day
       ).first_or_create(name: 'Video Peqrformance Report')
 
       csv = CSV.parse(report_params['file'].tempfile.read)
 
-      record.youtube_earned_data_raw = csv
+      record.youtube_earned_data_raw = csv.to_csv
+      record.ready
       record.save!
       
       report_params['file'].tempfile.rewind

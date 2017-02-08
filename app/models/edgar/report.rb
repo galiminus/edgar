@@ -21,7 +21,7 @@ module Edgar
     scope :completion, -> { order(aasm_state: :desc) }
 
     def youtube_earned_data
-      data = JSON.parse(self.youtube_earned_data_raw)
+      data = self.youtube_earned_data_raw
       data[1..-1]
       .map do |e|
         e.zip(
@@ -50,11 +50,11 @@ module Edgar
       rows = data[1..-2].tap{ |e| e.delete_at(0) }.map do |row|
         labels.zip(
           row.tap{ |e| e.delete_at(0) }
-        ).map{ |e| e[0].to_s.include?('campaign') ? e : [e[0], e[1].to_f] }.to_h
+        ).map{ |e| (e[0].to_s.include?('campaign') or e[0].to_s.include?('id')) ? e : [e[0], e[1].to_f] }.to_h
       end
 
       totals = labels.zip(data[-1].tap{ |e| e.delete_at(0) })
-      .map{ |e| e[0].to_s.include?('campaign') ? e : [e[0], e[1].to_f] }.to_h
+        .map{ |e| (e[0].to_s.include?('campaign') or e[0].to_s.include?('id')) ? e : [e[0], e[1].to_f] }.to_h
 
       { labels: labels, rows: rows, totals: totals }
     end

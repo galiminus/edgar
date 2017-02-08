@@ -20,13 +20,13 @@ module Edgar
             by: :day,
             since: 1.day.ago,
             until: 1.day.ago
-          ).values.reduce(:+),
-          monetized_playbacks: channel.monetized_playbacks[:total],
+          ).values.map(&:to_f).reduce(:+),
+          monetized_playbacks: channel.monetized_playbacks[:total].to_f,
           revenue: channel.estimated_revenue(
             since: 1.day.ago,
             until: 1.day.ago,
             in: 'FR'
-          ).values.reduce(:+),
+          ).values.map(&:to_f).reduce(:+),
           subscribers: channel.subscriber_count
         }
       end
@@ -36,6 +36,7 @@ module Edgar
 
       record.date ||= (Time.zone.now - 1.day).beginning_of_day
       record.youtube_data_raw = data.to_json
+      record.ready
       record.save!
 
       stringIO = StringIO.new
