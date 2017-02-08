@@ -20,7 +20,7 @@ module Edgar
       )      
 
       @owner = Yt::ContentOwner.new(
-        name: youtube_accounts.owner_name,
+        name: youtube_account.owner_name,
         refresh_token: youtube_account.refresh_token,
         scopes: ['youtube', 'youtube.readonly'],
         expires_at: 0
