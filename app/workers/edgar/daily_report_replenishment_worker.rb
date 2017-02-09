@@ -40,7 +40,6 @@ module Edgar
           },
           values: Hash.new(0).merge!(
             exchange_rate: mxn2usd,
-            #date: ads[:day].to_f,
             views: views.to_f,
             impressions: ads[:impressions].to_f,
             paid_views: ads[:views].to_f,

@@ -36,7 +36,7 @@ module Edgar
 
       record.date ||= (Time.zone.now - 1.day).beginning_of_day
       record.youtube_data_raw = data.to_json
-      record.ready
+      record.replenish!
       record.save!
 
       stringIO = StringIO.new

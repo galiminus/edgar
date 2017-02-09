@@ -20,7 +20,7 @@ module Edgar
       csv = CSV.parse(report_params['file'].tempfile.read)
 
       record.youtube_earned_data_raw = csv.to_csv
-      record.ready
+      record.replenish!
       record.save!
       
       report_params['file'].tempfile.rewind

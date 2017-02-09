@@ -25,9 +25,9 @@ module Edgar
         .first_or_create(name: 'Video Performance Report')
 
         record.date = (Time.zone.now - 1.day).beginning_of_day
-        record.account_name = account[:name],
         record.account_id = account[:customer_id],
         record.adwords_data_raw = CSV.parse(data).to_json
+        record.replenish!
         record.save!
  
         Edgar::AWSClient.new(
