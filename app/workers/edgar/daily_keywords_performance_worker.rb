@@ -42,7 +42,7 @@ module Edgar
         end
 
         influxdb = Edgar::InfluxDBClient.new
-        influx.write(ts, 'daily_keywords_performance')
+        influxdb.write(ts, 'daily_keywords_performance')
       end
     end
   end
