@@ -21,7 +21,7 @@ module Edgar
     scope :completion, -> { order(aasm_state: :desc) }
 
     def youtube_earned_data
-      data = self.youtube_earned_data_raw
+      data = JSON.parse(self.youtube_earned_data_raw)
       data[1..-1]
       .map do |e|
         e.zip(

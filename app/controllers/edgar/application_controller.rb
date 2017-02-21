@@ -15,7 +15,7 @@ module Edgar
       record = Edgar::Report.where(
         'date >= ?',
         report_params[:date].to_date || (Time.zone.now - 1.day).beginning_of_day
-      ).first_or_create(name: 'Video Peqrformance Report')
+      ).first_or_create(name: 'Video Performance Report')
 
       csv = CSV.parse(report_params['file'].tempfile.read)
 
