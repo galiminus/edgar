@@ -19,10 +19,10 @@ module Edgar
 
       csv = CSV.parse(report_params['file'].tempfile.read)
 
-      record.youtube_earned_data_raw = csv.to_csv
+      record.youtube_earned_data_raw = csv.to_json
       record.replenish!
       record.save!
-      
+
       report_params['file'].tempfile.rewind
       Edgar::AWSClient.new(
         "daily-youtube-earned-performance-#{(Time.zone.now - 1.day).strftime('%d%m%Y')}.csv",
