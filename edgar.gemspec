@@ -18,11 +18,11 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", "~> 5.0.0", ">= 5.0.0.1"
   s.add_dependency "sidekiq"
-  s.add_dependency "sidetiq"
   s.add_dependency "influxdb"
   s.add_dependency "google-api-client", "~> 0.8"
   s.add_dependency "google-adwords-api"
   s.add_dependency "aasm"
+  s.add_dependency "rdoc"
   s.add_dependency "kaminari"
 
   s.add_development_dependency "byebug"

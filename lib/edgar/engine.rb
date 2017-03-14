@@ -1,4 +1,3 @@
-require 'sidetiq'
 require 'thread'
 
 module Edgar

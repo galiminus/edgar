@@ -1,9 +1,6 @@
 module Edgar
   class DailyVideoPerformanceWorker
     include ::Sidekiq::Worker
-    include ::Sidetiq::Schedulable
-
-    recurrence { daily }
 
     def perform
       definition = Edgar::ReportDefinition.new('VIDEO PERFORMANCE')
@@ -29,7 +26,7 @@ module Edgar
         record.adwords_data_raw = CSV.parse(data).to_json
         record.replenish!
         record.save!
- 
+
         Edgar::AWSClient.new(
           "daily-video-performance-#{account[:customer_id]}-#{(Time.zone.now - 1.day).strftime('%d%m%Y')}.csv",
           StringIO.new(data)

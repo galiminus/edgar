@@ -1,9 +1,6 @@
 module Edgar
   class DailyKeywordsPerformanceWorker
     include Sidekiq::Worker
-    include Sidetiq::Schedulable
-
-    recurrence { daily }
 
     def perform
       definition = Edgar::ReportDefinition.new('KEYWORDS PERFORMANCE')
