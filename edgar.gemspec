@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
-  s.add_dependency "rails", "~> 5.0.0", ">= 5.0.0.1"
+  s.add_dependency "rails", "= 5.1.4"
   s.add_dependency "sidekiq"
   s.add_dependency "influxdb"
   s.add_dependency "google-api-client", "~> 0.8"
