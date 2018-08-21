@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "= 5.1.4"
   s.add_dependency "sidekiq"
   s.add_dependency "influxdb"
-  s.add_dependency "google-api-client", "~> 0.8"
+  s.add_dependency "google-api-client", "~> 0.23.4"
   s.add_dependency "google-adwords-api"
   s.add_dependency "aasm"
   s.add_dependency "rdoc"
