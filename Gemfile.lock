@@ -1,10 +1,10 @@
 PATH
   remote: .
   specs:
-    edgar (0.1.0)
+    edgar (0.1.2)
       aasm
       google-adwords-api
-      google-api-client (~> 0.23.4)
+      google-api-client (~> 0.21.2)
       influxdb
       kaminari
       rails (= 5.1.4)
@@ -87,7 +87,7 @@ GEM
     google-adwords-api (1.3.0)
       google-ads-common (~> 1.0.0)
       nori (~> 2.6)
-    google-api-client (0.23.4)
+    google-api-client (0.21.2)
       addressable (~> 2.5, >= 2.5.1)
       googleauth (>= 0.5, < 0.7.0)
       httpclient (>= 2.8.1, < 3.0)
